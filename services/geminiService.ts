@@ -1,17 +1,10 @@
 import { GoogleGenAI } from "@google/genai";
 
-const apiKey = process.env.API_KEY || '';
-
-// Initialize client securely
-// Note: In a production environment, requests should be proxied through a backend to protect the API key.
-// For this frontend-only demo, we use the env variable directly.
-const ai = new GoogleGenAI({ apiKey });
+// Initialize client securely using process.env.API_KEY directly as per guidelines.
+// Assume process.env.API_KEY is pre-configured and valid.
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 export const generateAiSolution = async (problem: string): Promise<string> => {
-  if (!apiKey) {
-    return "Error: API Key is missing. Please configure the environment variable.";
-  }
-
   try {
     const response = await ai.models.generateContent({
       model: 'gemini-3-flash-preview',
@@ -22,7 +15,8 @@ export const generateAiSolution = async (problem: string): Promise<string> => {
       Keep the tone professional, helpful, and direct.
       If the problem involves health, add a disclaimer to consult a doctor.`,
       config: {
-        maxOutputTokens: 500,
+        // Guidelines: Avoid setting maxOutputTokens if not required.
+        // Gemini 3 models are thinking models; setting maxOutputTokens without thinkingBudget is incorrect.
         temperature: 0.7,
       }
     });

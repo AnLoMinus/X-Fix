@@ -6,7 +6,7 @@ import SolutionModal from './components/SolutionModal';
 import AIFixer from './components/AIFixer';
 import { MOCK_SOLUTIONS } from './data/mockSolutions';
 import { Category, Solution } from './types';
-import { SearchX } from 'lucide-react';
+import { SearchX, Github, ExternalLink, Code2 } from 'lucide-react';
 
 const App: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -46,11 +46,11 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-fix-blue text-slate-200 font-sans selection:bg-fix-accent selection:text-white">
+    <div className="min-h-screen bg-fix-blue text-slate-200 font-sans selection:bg-fix-accent selection:text-white flex flex-col">
       
       <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12 flex-grow w-full">
         
         {/* Hero / Intro Text */}
         <div className="mb-10 text-center space-y-4">
@@ -120,11 +120,47 @@ const App: React.FC = () => {
       )}
 
       {/* Footer */}
-      <footer className="border-t border-slate-800 py-8 bg-slate-900 mt-auto">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <p className="text-slate-500 text-sm">
-            &copy; 2026 X-Fix. Built for the future.
-          </p>
+      <footer className="border-t border-slate-800 bg-slate-900 py-12">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-6">
+          
+          <div className="flex flex-col items-center md:items-start gap-2">
+            <span className="text-xl font-bold text-white tracking-tight flex items-center gap-2">
+              X-FIX <span className="text-xs font-normal text-slate-500 px-2 py-0.5 border border-slate-700 rounded-full">v1.0.0</span>
+            </span>
+            <p className="text-slate-500 text-sm">
+              &copy; {new Date().getFullYear()} AnLoMinus. Built for the future.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-6">
+            <a 
+              href="https://github.com/AnLoMinus/X-Fix" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors group"
+            >
+              <div className="p-2 bg-slate-800 rounded-full group-hover:bg-slate-700 transition-colors">
+                <Github className="w-5 h-5" />
+              </div>
+              <span className="text-sm font-medium">Source Code</span>
+            </a>
+
+            <div className="h-8 w-px bg-slate-800 hidden md:block"></div>
+
+            <a 
+              href="https://ai.google.dev/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-slate-400 hover:text-fix-accent transition-colors group"
+            >
+              <div className="p-2 bg-slate-800 rounded-full group-hover:bg-slate-800 transition-colors">
+                <Code2 className="w-5 h-5" />
+              </div>
+              <span className="text-sm font-medium">Powered by Gemini</span>
+              <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+            </a>
+          </div>
+
         </div>
       </footer>
 
