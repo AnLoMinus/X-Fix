@@ -30,7 +30,28 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AnLoMinus/X-Fix@gh-pages/assets/index-CUA5M3P5.css">
 </head>
   <body>
+    <div id="x-fix-banner" style="position:fixed;top:0;left:0;right:0;z-index:9999;padding:6px;background:#f97316;color:#0f172a;text-align:center;font-weight:600;font-family:system-ui,Arial,Helvetica,sans-serif;">Initializing X-Fix…</div>
+
     <div id="root"></div>
-    <script type="module" src="https://cdn.jsdelivr.net/gh/AnLoMinus/X-Fix@gh-pages/assets/index-B9mS9u0G.js"></script>
+
+    <!-- Small visible diagnostics + robust load handler to show load/error status to users immediately -->
+    <script>
+      (function(){
+        const banner = document.getElementById('x-fix-banner');
+        function set(msg, color){ if(!banner) return; banner.textContent = msg; if(color) banner.style.background = color; banner.style.display = 'block'; }
+        set('Loading app assets…');
+
+        window.addEventListener('error', (e)=>{ set('Error: '+(e.message||e.toString()), '#dc2626'); console.error('X-Fix: page error', e.message, e.error); });
+        window.addEventListener('unhandledrejection', (ev)=>{ set('Unhandled rejection', '#dc2626'); console.error('X-Fix: unhandledrejection', ev.reason); });
+
+        // Dynamically load module JS so we can detect onload / onerror reliably
+        const s = document.createElement('script');
+        s.type = 'module';
+        s.src = 'https://cdn.jsdelivr.net/gh/AnLoMinus/X-Fix@gh-pages/assets/index-B9mS9u0G.js';
+        s.onload = ()=>{ set('App loaded — check console for diagnostics. ✅', '#16a34a'); setTimeout(()=>banner.style.display='none',5000); };
+        s.onerror = (e)=>{ set('Failed to load app script (see console).', '#dc2626'); console.error('X-Fix: script load error', e); };
+        document.body.appendChild(s);
+      })();
+    </script>
   </body>
 </html>
