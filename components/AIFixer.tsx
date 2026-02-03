@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { generateAiSolution } from '../services/geminiService';
+import { generateAiSolution, isAiAvailable } from '../services/geminiService';
 import { Bot, Send, Loader2, Sparkles, AlertCircle } from 'lucide-react';
 import { Solution, Category } from '../types';
 
@@ -41,6 +41,27 @@ const AIFixer: React.FC<AIFixerProps> = ({ onSolutionGenerated }) => {
       setLoading(false);
     }
   };
+
+  if (!isAiAvailable) {
+    return (
+      <div className="max-w-4xl mx-auto mb-12 animate-in slide-in-from-bottom-4 duration-500">
+        <div className="bg-gradient-to-br from-indigo-900/50 to-slate-900/50 border border-indigo-500/30 rounded-2xl p-1 shadow-2xl shadow-indigo-500/10">
+          <div className="bg-slate-900 rounded-xl p-6 sm:p-8">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="bg-indigo-500/20 p-2 rounded-lg">
+                  <Sparkles className="w-6 h-6 text-indigo-400" />
+              </div>
+              <div>
+                  <h2 className="text-xl font-bold text-white">AI Generator disabled</h2>
+                  <p className="text-slate-400 text-sm">AI generation is disabled in this build because a server-side API key is not configured.</p>
+              </div>
+            </div>
+            <p className="text-slate-400 text-sm">If you want to enable AI generation, configure a server-side API key and/or expose an endpoint that calls Gemini securely.</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-4xl mx-auto mb-12 animate-in slide-in-from-bottom-4 duration-500">

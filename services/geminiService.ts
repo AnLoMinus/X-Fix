@@ -1,11 +1,26 @@
-import { GoogleGenAI } from "@google/genai";
+// Gemini client usage is server-side only. Avoid instantiating the client at module load time
+// because importing this module in the browser would attempt to create a client and fail
+// when an API key is not available (causing the runtime error observed).
 
-// Initialize client securely using process.env.API_KEY directly as per guidelines.
-// Assume process.env.API_KEY is pre-configured and valid.
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+export const isAiAvailable = Boolean(process.env.API_KEY);
 
 export const generateAiSolution = async (problem: string): Promise<string> => {
   try {
+    // Prevent client instantiation / network calls from running in the browser.
+    if (typeof window !== 'undefined') {
+      console.warn('Gemini generation requested in browser without a server API key.');
+      throw new Error('AI generation is disabled in the browser. Please configure a server-side API key or use a backend endpoint.');
+    }
+
+    if (!process.env.API_KEY) {
+      console.error('Missing server API key for Gemini generation.');
+      throw new Error('Missing server API key for AI generation.');
+    }
+
+    // Lazy-load the package on the server to avoid shipping the client code to browsers
+    const { GoogleGenAI } = await import('@google/genai');
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+
     const response = await ai.models.generateContent({
       model: 'gemini-3-flash-preview',
       contents: `You are X-Fix, an expert troubleshooter for all life's problems. 
@@ -15,8 +30,6 @@ export const generateAiSolution = async (problem: string): Promise<string> => {
       Keep the tone professional, helpful, and direct.
       If the problem involves health, add a disclaimer to consult a doctor.`,
       config: {
-        // Guidelines: Avoid setting maxOutputTokens if not required.
-        // Gemini 3 models are thinking models; setting maxOutputTokens without thinkingBudget is incorrect.
         temperature: 0.7,
       }
     });
