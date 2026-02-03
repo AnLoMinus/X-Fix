@@ -1,3 +1,145 @@
+בחירה נכונה של רישיון היא הצעד הקריטי ביותר להפיכת **X-Fix** ממיזם אלטרואיסטי למודל עסקי בר-קיימא. בשביל לשמור על הזכויות שלך ובו זמנית לאפשר לאנשים להשתמש בפתרונות, אנחנו צריכים אסטרטגיה חכמה. 🛡️
+
+## LicenseStrategy אסטרטגייתרישוי 💎
+
+---
+
+### ⚖️ הרישיון המומלץ: Business-Friendly & Protected
+
+מאחר שאתה רוצה להתפרנס מתפעול או "נקודות קטנות", אנחנו צריכים רישיון שמונע מאחרים פשוט לקחת את כל המאגר ולמכור אותו בעצמם תחת שמם.
+
+* **רישיון Polyform Non-Commercial:** 🛑
+זהו רישיון שמאפשר לאנשים להשתמש בקוד ובפתרונות לשימוש אישי, אבל **אוסר עליהם לעשות מזה כסף** ללא אישור ממך. זה משאיר לך את הדלת פתוחה למכור שירותי תמיכה, הטמעה או פתרונות פרימיום.
+* **רישיון Creative Commons (CC BY-NC-SA):** 🎨
+מתאים מאוד לתוכן של "פתרונות למחלות ובעיות". הוא אומר: "מותר לכם לשתף ולשנות, אבל אתם חייבים לתת לי קרדיט, ואסור לכם להשתמש בזה למטרות רווח".
+* **רישיון AGPLv3:** ⛓️
+אם אתה משחרר קוד מקור, זהו רישיון "ויראלי". כל מי שמשתמש בקוד שלך באתר שלו חייב לשחרר את הקוד שלו גם כן. זה מרתיע חברות ענק מ"לגנוב" את הקוד לתוך מערכות סגורות.
+
+### 💰 איך תייצר מזה פרנסה? (The Monetization)
+
+הקוד פתוח, אבל הערך המוסף הוא שלך:
+
+1. **SaaS Support:** מתן תמיכה טכנית אישית ליישום הפתרונות. 🛠️
+2. **Premium Directory:** ה-JSON הבסיסי בחינם, אבל פתרונות מורכבים יותר (Deep Fixes) דורשים מנוי.
+3. **Donations/Sponsorship:** שימוש ב-GitHub Sponsors וב-Buy Me a Coffee בתוך דפי הפתרונות. ☕
+4. **Custom Development:** אנשים יראו שאתה "The Fixer" וישכרו אותך לפתור בעיות ספציפיות שלהם.
+
+### 📝 מה להוסיף לקובץ ה-README?
+
+אתה חייב להוסיף סעיף שנקרא **"Commercial Usage"**. שם תכתוב בבירור:
+
+> "הפתרונות במאגר זה חופשיים לשימוש אישי. לשימוש מסחרי, הטמעה בארגונים או קבלת תמיכה טכנית מורחבת, יש ליצור קשר עם AnLoMinus."
+
+---
+
+### 🎤 Artistic Break: The License Flow
+
+הקוד הוא פתוח אבל הלב הוא סגור 🔒
+רישיון חזק ששומר על האור 💡
+בנית פה דרך, בנית פה שם 🏗️
+הערך שלך יעבור בעולם! 🌍
+
+---
+
+### 📜 דבר תורה
+
+"וִיהִי נֹעַם אֲדֹנָי אֱלֹהֵינוּ עָלֵינוּ וּמַעֲשֵׂה יָדֵינוּ כּוֹנְנָה עָלֵינוּ" (תהילים צ', י"ז) – התפילה שהקב"ה ייתן קיום וברכה לתוצר המעשי של ידינו, שיהיה לו המשכיות ופרנסה טובה.
+
+**תאריך לועזי:** Tuesday, February 3, 2026
+**תאריך עברי:** ט"ז בשבט ה'תשפ"ו
+**זמן נוכחי:** 21:28
+
+**Credits:** * Licensing Guidance: Polyform & Creative Commons
+
+* Strategy: Open Core / Professional Services Model
+* Repository: AnLoMinus/X-Fix
+
+**מספר המידות:** 342 מילים.
+
+**ליאון, האם תרצה שאנסח עבורך קובץ LICENSE רשמי שתוכל להעלות לגיטהאב כבר עכשיו?**
+
+---
+
+מעולה ליאון! בחרתי עבורך בגישה של **Dual-Licensing**. המודל הזה מאפשר לך להפיץ את הבשורה בחינם לקהל הרחב, תוך הגנה משפטית מוחלטת מפני חברות שינסו לעשות כסף מהידע שלך בלי לשלם לך. 🛡️
+
+## LicenseArchitect בניתהרישיון 📜
+
+---
+
+### 📄 טיוטת קובץ ה-LICENSE למאגר X-Fix
+
+העתק את הטקסט הבא לקובץ חדש בשם `LICENSE` בשורש המאגר שלך בגיטהאב:
+
+```markdown
+# X-Fix Public License & Usage Terms
+
+Copyright (c) 2026 Leon (AnLoMinus)
+
+## 1. Personal & Non-Commercial Use
+Permission is hereby granted, free of charge, to any person obtaining a copy of this 
+software and associated documentation files (the "Software"), to use the Software 
+for personal, educational, and non-commercial purposes.
+
+## 2. Commercial Use Restriction
+Selling, sublicensing, or using this Software/Data in any commercial product or 
+service is STRICTLY PROHIBITED without prior written consent from the author.
+
+## 3. Attribution
+Redistributions of the Software or its content must retain the above copyright 
+notice and this permission notice in all copies.
+
+## 4. Monetization & Support
+For commercial licensing inquiries, professional implementation, or technical 
+support, please contact the author directly via GitHub: @AnLoMinus.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
+
+```
+
+### 🚀 הסבר על הכוח של הרישיון הזה
+
+1. **הגנה מסחרית:** אף גוף לא יכול להעתיק את 500 הפתרונות שלך ולהפוך אותם לאפליקציה בתשלום. הם חייבים לעבור דרכך. 🛑
+2. **שימור זכויות יוצרים:** השם שלך (AnLoMinus) חייב להופיע בכל מקום שבו משתמשים בפתרון שלך. זה בונה לך "Authority" בשוק. 👑
+3. **מודל ה-Consulting:** הרישיון מפנה אנשים ישירות אליך לקבלת תמיכה. זהו הצינור המרכזי לפרנסה מהפרויקט.
+
+### 🛠️ טיפ ל-README.md
+
+כדי שהרישיון יהיה ברור לכולם, הוסף את השורה הבאה בתחילת דף הבית של המאגר:
+
+> "🔒 **License:** Free for personal use. Commercial use requires a license from the author."
+
+---
+
+### 🎤 Artistic Break: The Code Guard
+
+החוזה חתום, הרישיון כבר כאן 📝
+שומר על הקוד, שומר על הזמן ⏳
+כל פתרון הוא פנינה, כל שורה היא זהב 💰
+הצלחנו ליאון, אנחנו בדרך עכשיו! 🚀
+
+---
+
+### 📜 דבר תורה
+
+"לֹא תַשִּׂיג גְּבוּל רֵעֲךָ" (דברים י"ט, י"ד) – האיסור על השגת גבול מלמד אותנו את החשיבות של כיבוד קניין רוחני ועמל כפיו של האדם.
+
+**תאריך לועזי:** Tuesday, February 3, 2026
+**תאריך עברי:** ט"ז בשבט ה'תשפ"ו
+**זמן נוכחי:** 21:40
+
+**Credits:** * Licensing Model: Custom Proprietary/Non-Commercial
+
+* Protection: Intellectual Property Law
+* Repository Owner: Leon (AnLoMinus)
+
+**מספר המידות:** 312 מילים.
+
+**ליאון, האם תרצה שנתחיל לעבוד על קובץ ה-JSON שמארגן את 500 הפתרונות שלך בצורה חכמה?**
+
+
+
+---
+
 Eclipse Public License - v 2.0
 
     THE ACCOMPANYING PROGRAM IS PROVIDED UNDER THE TERMS OF THIS ECLIPSE
@@ -275,3 +417,8 @@ version(s), and exceptions or additional permissions here}."
   look for such a notice.
 
   You may add additional accurate notices of copyright ownership.
+
+
+
+---
+
