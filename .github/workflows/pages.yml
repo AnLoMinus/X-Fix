@@ -52,7 +52,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: deploy
     steps:
-      - name: Verify Pages is serving site
+      - name: Verify Pages is serving site or CDN fallback
         env:
           OWNER: ${{ github.repository_owner }}
           REPO: ${{ github.event.repository.name }}
@@ -60,16 +60,59 @@ jobs:
           set -euo pipefail
           URL="https://$OWNER.github.io/$REPO/"
           echo "Verifying $URL"
+
           attempts=0
           max=24
-          until curl -sSf "$URL" | sed -n '1,200p' | grep -q "Fix anything\.|X-FIX"; do
+          success=1
+          until [ "$attempts" -ge "$max" ]; do
             attempts=$((attempts+1))
-            if [ "$attempts" -ge "$max" ]; then
-              echo "Site did not respond with expected content after $((max*5)) seconds"
-              curl -sSf "$URL" || true
-              exit 1
+            html=$(curl -sSf "$URL" || true)
+
+            # If server HTML contains a server-rendered marker, succeed
+            if printf "%s" "$html" | grep -q "Fix anything\.|X-FIX"; then
+              echo "Server-served HTML contains expected content ✅"
+              success=0
+              break
             fi
+
+            # If HTML references our CDN fallback, check CDN assets
+            if printf "%s" "$html" | grep -q "cdn.jsdelivr.net/gh/$OWNER/$REPO@gh-pages/assets"; then
+              echo "Found CDN fallback reference in HTML. Verifying asset availability..."
+              js_url=$(printf "%s" "$html" | grep -oE "https://cdn\.jsdelivr\.net/gh/$OWNER/$REPO@gh-pages/assets/[^"]+\.js" | head -n1) || true
+              css_url=$(printf "%s" "$html" | grep -oE "https://cdn\.jsdelivr\.net/gh/$OWNER/$REPO@gh-pages/assets/[^"]+\.css" | head -n1) || true
+
+              if [ -n "$js_url" ]; then
+                echo "Checking JS asset: $js_url"
+                status_js=$(curl -sSI "$js_url" | sed -n '1p') || true
+                if printf "%s" "$status_js" | grep -qi "content-type:.*javascript"; then
+                  echo "JS asset is accessible and served as JavaScript ✅"
+                  success=0
+                  break
+                else
+                  echo "JS asset missing or wrong content-type yet. Will retry."
+                fi
+              fi
+
+              if [ -n "$css_url" ]; then
+                echo "Checking CSS asset: $css_url"
+                status_css=$(curl -sSI "$css_url" | sed -n '1p') || true
+                if printf "%s" "$status_css" | grep -qi "content-type:.*css"; then
+                  echo "CSS asset is accessible and served as CSS ✅"
+                  success=0
+                  break
+                else
+                  echo "CSS asset missing or wrong content-type yet. Will retry."
+                fi
+              fi
+            fi
+
             echo "Attempt $attempts/$max - page not ready yet, sleeping 5s"
             sleep 5
           done
-          echo "Site is live and contains expected content ✅"
+
+          if [ "$success" -ne 0 ]; then
+            echo "Site did not respond with expected content or accessible assets after $((max*5)) seconds"
+            echo "Latest HTML snippet:"; printf "%s" "$html" | sed -n '1,200p'
+            exit 1
+          fi
+          echo "Site appears live and assets available ✅"
