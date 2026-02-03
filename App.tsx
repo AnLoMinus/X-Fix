@@ -10,6 +10,51 @@ import { SearchX, Github, ExternalLink, Code2 } from 'lucide-react';
 
 const App: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
+
+  // Diagnostic logging + global error handlers for easier debugging in production
+  useEffect(() => {
+    try {
+      console.group('%cX-Fix Diagnostics 🔧', 'color: #10b981; font-weight: 700;');
+      const footerVersion = document.querySelector('footer .text-xs')?.textContent?.trim() || 'v?';
+      console.log('Version:', footerVersion);
+      console.log('Time (client):', new Date().toISOString());
+      console.log('URL:', location.href);
+
+      const issues: string[] = [];
+      if (!document.getElementById('root')) issues.push('Missing #root container');
+      if (!document.querySelector('h2')) issues.push('Missing main hero title (h2)');
+      if (!document.querySelector('footer')) issues.push('Missing footer');
+      // check for grid or fallback no-fixes area
+      if (!document.querySelector('.grid') && !document.querySelector('h3')) {
+        issues.push('No solutions grid / no-result section detected');
+      }
+
+      if (issues.length === 0) {
+        console.log('Content checks: OK ✅');
+      } else {
+        console.warn('Content checks: Issues found:', issues);
+      }
+
+      console.groupEnd();
+    } catch (err) {
+      console.error('Diagnostics failed:', err);
+    }
+
+    const onError = (event: ErrorEvent) => {
+      console.error('Uncaught error:', event.message, event.error);
+    };
+    const onRejection = (event: PromiseRejectionEvent) => {
+      console.error('Unhandled promise rejection:', event.reason);
+    };
+
+    window.addEventListener('error', onError);
+    window.addEventListener('unhandledrejection', onRejection);
+
+    return () => {
+      window.removeEventListener('error', onError);
+      window.removeEventListener('unhandledrejection', onRejection);
+    };
+  }, []);
   const [selectedCategory, setSelectedCategory] = useState<Category>(Category.ALL);
   const [selectedSolution, setSelectedSolution] = useState<Solution | null>(null);
   const [solutions, setSolutions] = useState<Solution[]>(MOCK_SOLUTIONS);

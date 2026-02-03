@@ -37,3 +37,29 @@ jobs:
           publish_branch: gh-pages
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
+
+  verify:
+    runs-on: ubuntu-latest
+    needs: deploy
+    steps:
+      - name: Verify Pages is serving site
+        env:
+          OWNER: ${{ github.repository_owner }}
+          REPO: ${{ github.event.repository.name }}
+        run: |
+          set -euo pipefail
+          URL="https://$OWNER.github.io/$REPO/"
+          echo "Verifying $URL"
+          attempts=0
+          max=24
+          until curl -sSf "$URL" | sed -n '1,200p' | grep -q "Fix anything\.|X-FIX"; do
+            attempts=$((attempts+1))
+            if [ "$attempts" -ge "$max" ]; then
+              echo "Site did not respond with expected content after $((max*5)) seconds"
+              curl -sSf "$URL" || true
+              exit 1
+            fi
+            echo "Attempt $attempts/$max - page not ready yet, sleeping 5s"
+            sleep 5
+          done
+          echo "Site is live and contains expected content ✅"
