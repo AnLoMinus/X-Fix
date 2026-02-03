@@ -4,29 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>X-Fix | The Solution Engine</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              'fix-blue': '#0f172a', // Slate 900
-              'fix-light': '#f8fafc', // Slate 50
-              'fix-accent': '#10b981', // Emerald 500
-              'fix-accent-hover': '#059669',
-            },
-            fontFamily: {
-              sans: ['Inter', 'system-ui', 'sans-serif'],
-            },
-          },
-        },
-      }
-    </script>
+    <!-- Tailwind is built via PostCSS in production; CDN removed -->
+    <!-- Styles are included from `index.css` (built with Tailwind) -->
     <style>
-      body {
-        background-color: #0f172a;
-        color: #f8fafc;
-      }
+      /* Fallback scrollbar styles */
       ::-webkit-scrollbar { width: 8px; }
       ::-webkit-scrollbar-track { background: #0f172a; }
       ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
