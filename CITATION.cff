@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: "AnLoMinus"
+    given-names: "Dev"
+    # orcid: "https://orcid.org/0000-0000-0000-0000"
+title: "X-Fix: The Solution Engine"
+version: 1.0.0
+date-released: 2026-02-03
+url: "https://github.com/AnLoMinus/X-Fix"
+license: MIT
