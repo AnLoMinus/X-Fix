@@ -37,6 +37,16 @@ jobs:
           publish_branch: gh-pages
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
+      - name: Ensure Pages source is set to gh-pages
+        env:
+          OWNER: ${{ github.repository_owner }}
+          REPO: ${{ github.event.repository.name }}
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Setting Pages source to gh-pages for $OWNER/$REPO"
+          curl -sSf -X PUT -H "Authorization: token $TOKEN" -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/$OWNER/$REPO/pages \
+            -d '{"source":{"branch":"gh-pages","path":"/"}}' || true
 
   verify:
     runs-on: ubuntu-latest
